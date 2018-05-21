@@ -1,0 +1,4 @@
+#oldboy services
+#Nginx-LB01-server drbddisk::all Filesystem::/dev/drbd0::/mnt::ext4 ntpd nginxd IPaddr::192.168.199.131/24/eth0
+#Nginx-LB02-server IPaddr::192.168.199.132/24/eth0
+Nfs-server drbddisk::all Filesystem::/dev/drbd0::/html::ext4 IPaddr::10.0.0.136/24/eth1 rpcbind nfs remount_allclient

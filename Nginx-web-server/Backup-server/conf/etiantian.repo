@@ -1,0 +1,5 @@
+[etiantian]
+name=Server
+baseurl=http://yum.etiantian.org
+enabled=1
+gpgcheck=0

@@ -1,0 +1,55 @@
+#!/bin/bash
+# Date:   01:17 2018-05-16 
+# Author: Created by jeson
+# Mail:   309769163@qq.com
+# Funcsion:This scripts funcsion is start and stop mysqld 
+#	   
+### BEGIN INIT INFO
+port=3307
+mysql_user=root
+mysql_pwd=""
+CmdPath=/application/mysql/bin
+mysql_sock=/data/${port}/mysql.sock
+
+#startup function
+function_start_mysql(){
+	if [ ! -e ${mysql_sock} ];then
+		echo "Starting MySQL..."
+		/bin/bash ${CmdPath}/mysqld_safe --defaults-file=/data/${port}/my.cnf &>/dev/null &
+	else
+		echo "MySQL is running..."
+		exit
+	fi
+}
+
+#stop function
+function_stop_mysql(){
+    if [ ! -e ${mysql_sock} ];then
+        echo "MySQL is stopped..."
+		exit
+    else
+        echo "Stopping MySQL..."
+        ${CmdPath}/mysqladmin -u ${mysql_user} -p${mysql_pwd} -S /data/${port}/mysql.sock shutdown
+    fi	
+}
+
+#restart function
+function_restart_mysql(){
+	echo "Restarting MySQL..."
+	function_stop_mysql
+	sleep 2
+	function_start_mysql
+}
+case $1 in
+	start)
+		function_start_mysql
+		;;
+	stop)
+		function_stop_mysql
+		;;
+	restart)
+		function_restart_mysql
+		;;
+	*)
+		printf "Usage: /data/${port}/mysql {start|stop|restart}\n"
+esac

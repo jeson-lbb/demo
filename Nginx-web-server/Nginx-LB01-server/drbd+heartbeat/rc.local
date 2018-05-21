@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+
+touch /var/lock/subsys/local
+>/etc/udev/rules.d/70-persistent-net.rules
+
+## npd service start @root @2018-3-14 @cr001
+#/etc/init.d/ntpd start
+
+## nginx and php start  @root @2018-3-14 @cr002
+#/application/nginx/sbin/nginx
+
+#drbdadm up all
+
+/sbin/route add -host 172.16.1.31 dev eth2
+#modprobe drbd

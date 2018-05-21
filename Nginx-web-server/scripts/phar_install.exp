@@ -1,0 +1,5 @@
+#!/bin/expect
+spawn /application/php/bin/php /server/scripts/go-pear.phar
+expect {
+    "1-12, 'all'"  { send "\r";exp_continue }
+ }

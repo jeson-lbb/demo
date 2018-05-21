@@ -1,0 +1,6 @@
+## /backup/ delete +2 day dir @root @2018-3-14 @cr001
+00 00 * * * /bin/bash /server/scripts/cli_rsync_bak.sh &>/dev/null 
+
+## update system time to Nginx-LB01-server and Nginx-LB02-server @root @2018-3-14 @cr002
+*/5 * * * * /usr/sbin/ntpdate Nginx-LB01-server &>/dev/null
+*/7 * * * * /usr/sbin/ntpdate Nginx-LB02-server &>/dev/null

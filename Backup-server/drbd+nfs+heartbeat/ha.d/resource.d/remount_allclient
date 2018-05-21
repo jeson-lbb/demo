@@ -1,0 +1,24 @@
+#!/bin/bash
+# Date:   01:17 2018-02-24 
+# Author: Created by leeth
+# Mail:   309769163@qq.com
+# Funcsion:This scripts funcsion is remount allclient nfs
+sleep 2
+case "$1" in
+   start)
+	vip=10.0.0.136
+	for n in 34 
+	do 
+ssh 10.0.0.$n "umount -lf /html/bbs/data/attachment/forum;mount -t nfs ${vip}:/html/bbs/forum /html/bbs/data/attachment/forum;	umount -lf /html/bbs/uc_server/data/avatar;mount -t nfs ${vip}:/html/bbs/avatar /html/bbs/uc_server/data/avatar;	umount -lf /html/www/images/swfupload;mount -t nfs ${vip}:/html/www/swfupload /html/www/images/swfupload;	umount -lf /html/www/uploads/allimg;mount -t nfs ${vip}:/html/www/allimg /html/www/uploads/allimg;	umount -lf /html/blog/wp-content/uploads/;mount -t nfs ${vip}:/html/blog/uploads /html/blog/wp-content/uploads/"
+	done
+	RENVAL=$?
+	;;
+   stop)
+	RENVAL=0
+	;;
+      *)
+	echo "USAGE :$0 {start|stop}"
+	RENVAL=3
+esac
+exit $RENVAL
+

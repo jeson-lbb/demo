@@ -1,0 +1,8 @@
+## /backup/ delete +2 day dir @root @2018-3-14 @cr001
+30 * * * * /bin/bash /server/scripts/cli_rsync_bak.sh &>/dev/null 
+
+## update system time to 10.0.0.39 @root @2018-3-14 @cr002
+*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com &>/dev/null
+
+## nginx log lun xun evry day @root @2018-3-14 @cr003
+30 * * * * /bin/bash /server/scripts/cut_nginx_log.sh &>/dev/null

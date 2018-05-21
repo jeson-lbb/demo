@@ -1,0 +1,3 @@
+#oldboy services
+ Nginx-LB01-server ntpd nginxd IPaddr::192.168.199.131/24/eth0
+# Nginx-LB02-server IPaddr::192.168.199.132/24/eth0

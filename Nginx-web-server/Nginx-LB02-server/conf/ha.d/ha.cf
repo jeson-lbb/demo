@@ -1,0 +1,18 @@
+#the start by oldboy 
+debugfile /var/log/ha-debug
+logfile	/var/log/ha-log
+logfacility	local1
+
+keepalive 2
+deadtime 30
+warntime 10
+initdead 60
+
+#bcast	eth1  
+mcast eth2 225.0.0.31 694 1 0
+
+auto_failback on
+node	Nginx-LB01-server	
+node	Nginx-LB02-server
+crm	no
+#the end by oldboy 

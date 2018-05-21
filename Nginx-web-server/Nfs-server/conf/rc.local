@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+#>/etc/udev/rules.d/70-persistent-net.rules
+
+touch /var/lock/subsys/local
+
+# nfs and rpc start @root @2018-3-14 @cr001
+/etc/init.d/rpcbind start
+/etc/init.d/nfs start 
+
+## Inotify&rsync Nfs-server's /html/ to Backup-server's /html/ @root @2018-3-14 @cr002
+/bin/bash /server/scripts/inotifywait_html.sh &>/dev/null & 

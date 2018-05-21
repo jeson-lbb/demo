@@ -1,0 +1,103 @@
+#!/bin/bash
+#
+# nginxd        Startup script for the Nginx HTTP Server
+#
+# chkconfig: - 103 33
+# description: The Nginx HTTP Server is an efficient and extensible  \
+#          server implementing the current HTTP standards.
+# processname: nginxd
+# config: /application/nginx/conf/nginx.conf 
+# config: /application/nginx/conf/extra/*.conf
+# pidfile: /application/nginx/logs/nginx.pid
+# logfile: /application/nginx/logs/*.log
+#
+### BEGIN INIT INFO
+# Provides: nginx
+# Description: The Nginx HTTP Server is an extensible server 
+# implementing the current HTTP standards.
+### END INIT INFO
+
+# Path to the apachectl script, server binary, and short-sorm for messages.
+nginxd=/application/nginx/sbin/nginx
+prog=nginxd
+pidfile=/application/nginx/logs/nginx.pid
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+start() {
+    	$nginxd -t &>/dev/null
+    	[ $? -ne 0 ] && { $nginxd -t;action "Starting $prog:" false;exit 4 ; }
+    	if [ -s $pidfile ] ;then
+    	    echo -e "$prog (pid  $(cat $pidfile)) is running..."
+    	else
+    	    $nginxd &>/dev/null
+    	    [ $? -eq 0 ] && action "Starting $prog:" true||action "Starting $prog:" false
+    	fi
+    	RETVAL=$?
+    	return $RETVAL
+}
+stop(){
+    	$nginxd -t &>/dev/null
+    	[ $? -ne 0 ] && { $nginxd -t;action "Stopping $prog:" false;exit 5 ; }
+    	if [ -s $pidfile ] ;then
+    	    $nginxd -s stop &>/dev/null
+    	    [ $? -eq 0 ] && action "Stopping $prog:" true||action "Stopping $prog:" false
+    	else
+    	    echo -e "$prog is Stopped"
+    	fi
+    	RETVAL=$?
+    	return $RETVAL
+}
+reload(){
+    	$nginxd -t &>/dev/null
+    	[ $? -ne 0 ] && { $nginxd -t ;action "Reloading $prog:" false;exit 7 ; }
+    	if [ -s $pidfile ] ;then
+    	    $nginxd -s reload
+    	    [ $? -eq 0 ] && action "Reloading $prog:" true||action "Reloading $prog:" false
+    	else
+    	    echo -e "$prog is Stopped"
+    	    action "Reloading $prog:" false
+    	fi
+    	RETVAL=$?
+    	return $RETVAL
+}
+status(){
+    	if [ -s $pidfile ] ;then
+    	    echo -e "$prog (pid  $(cat $pidfile)) is running..."
+    	else
+    	    echo -e "$prog is Stopped"
+    	fi
+    	RETVAL=$?
+    	return $RETVAL
+}
+restart(){
+        $nginxd -t &>/dev/null
+        [ $? -ne 0 ] && { $nginxd -t;action "Stopping $prog:" false;action "Starting $prog:" false;exit 6 ; }
+        $nginxd -s stop &>/dev/null
+        [ $? -eq 0 ] && action "Stopping $prog:" true||action "Stopping $prog:" false
+        $nginxd &>/dev/null
+        [ $? -eq 0 ] && action "Starting $prog:" true||action "Starting $prog:" false
+    	RETVAL=$?
+    	return $RETVAL
+}
+case "$1" in
+	start)
+	     start
+	     ;;
+	stop)
+	     stop
+	     ;;
+	status)
+	     status
+	     ;;
+	restart)
+	     restart
+	     ;;
+	reload)
+	     reload
+	     ;;
+	*)
+	     echo $"Usage: $0 {start|stop|status|restart|reload}"
+	     exit 8
+esac
+exit $RETVAL

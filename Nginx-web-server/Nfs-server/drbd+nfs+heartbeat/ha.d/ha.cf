@@ -1,0 +1,18 @@
+#the start by oldboy 
+debugfile /var/log/ha-debug
+logfile	/var/log/ha-log
+logfacility	local1
+
+keepalive 2
+deadtime 30
+warntime 10
+initdead 60
+
+bcast	eth2
+#mcast eth2 225.0.0.31 694 1 0
+
+auto_failback off
+node Nfs-server	
+node Backup-server
+crm	no
+#the end by oldboy 

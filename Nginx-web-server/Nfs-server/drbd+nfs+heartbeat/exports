@@ -1,0 +1,6 @@
+/html/blog/uploads 10.0.0.0/24(rw,sync,all_squash,anonuid=888,anongid=888)
+/html/bbs/image 10.0.0.0/24(rw,sync,all_squash,anonuid=888,anongid=888)
+/html/bbs/avatar 10.0.0.0/24(rw,sync,all_squash,anonuid=888,anongid=888)
+/html/bbs/forum 10.0.0.0/24(rw,sync,all_squash,anonuid=888,anongid=888)
+/html/www/swfupload 10.0.0.0/24(rw,sync,all_squash,anonuid=888,anongid=888)
+/html/www/allimg 10.0.0.0/24(rw,sync,all_squash,anonuid=888,anongid=888)

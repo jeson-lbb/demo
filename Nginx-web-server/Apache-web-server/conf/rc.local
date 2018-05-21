@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+#>/etc/udev/rules.d/70-persistent-net.rules
+
+touch /var/lock/subsys/local
+
+## Apache-web-server /application/apache/bin/apachectl -k restart  @root @2018-3-14 @cr001
+/application/apache/bin/apachectl -k start
+
+## bbs mount to Nfs-server @root @2018-3-14 @cr002
+cd /html/bbs/data/attachment
+[ -x forum~ ] || /bin/cp -a forum forum~ 
+mount -t nfs Nfs-server:/html/bbs/forum /html/bbs/data/attachment/forum
+/bin/cp -a forum~/* forum
+
+cd /html/bbs/uc_server/data
+[ -x  avatar~ ] || /bin/cp -a avatar avatar~ 
+mount -t nfs Nfs-server:/html/bbs/avatar /html/bbs/uc_server/data/avatar
+/bin/cp -a avatar~/* avatar
+## www mount to Nfs-server @root @2018-3-14 @cr003
+cd /html/www/images
+[ -x swfupload~ ] || /bin/cp -a swfupload swfupload~
+mount -t nfs Nfs-server:/html/www/swfupload /html/www/images/swfupload
+/bin/cp -a swfupload~/* swfupload
+
+cd /html/www/uploads
+[ -x allimg~ ] || /bin/cp -a allimg allimg~
+mount -t nfs Nfs-server:/html/www/allimg /html/www/uploads/allimg
+/bin/cp -a allimg~/* allimg
+## blog wordpress mount to Nfs-server @root @2018-3-14 @cr004
+cd /html/blog/wp-content
+[ -x uploads~ ] || /bin/cp -a uploads uploads~
+mount -t nfs Nfs-server:/html/blog/uploads /html/blog/wp-content/uploads/
+/bin/cp -a uploads~/* uploads
