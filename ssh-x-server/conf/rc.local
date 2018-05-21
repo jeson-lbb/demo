@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+
+touch /var/lock/subsys/local
+#>/etc/udev/rules.d/70-persistent-net.rules
+
+## yum server @root @2018-3-14 @cr001
+cd /application/yum/centos6.9/x86.64/
+/etc/init.d/httpd  start 
+#python -m SimpleHTTPServer 80 & &>/dev/null
+#每加一个包更新一下
+#createrepo --update /application/yum/centos6.9/x86.64/

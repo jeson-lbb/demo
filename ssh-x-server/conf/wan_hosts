@@ -1,0 +1,17 @@
+127.0.0.1	   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1        	   localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.199.31 Nginx-LB01-server lb01.etiantian.org
+10.0.0.31      Nginx-LB01-server lb01.etiantian.org
+172.16.1.31    Nginx-LB01-server lb01.etiantian.org
+
+192.168.199.32 Nginx-LB02-server lb02.etiantian.org
+10.0.0.32      Nginx-LB02-server lb02.etiantian.org
+172.16.1.32    Nginx-LB02-server lb02.etiantian.org
+
+192.168.199.33 Nginx-web-server  nginx.etiantian.org  www.etiantian.org  bbs.etiantian.org
+192.168.199.34 Apache-web-server apache.etiantian.org blog.etiantian.org www.phpMyAdmin.org knowledge.me
+192.168.199.35 MySQL-server      mysql.etiantian.org  db.etiantian.org
+192.168.199.36 Nfs-server        nfs.etiantian.org
+192.168.199.37 Backup-server     backup.etiantian.org
+192.168.199.38 ssh-x-server      ssh.etiantian.org    yum.etiantian.org
+10.0.0.38      ssh-x-server      centos.etiantian.org

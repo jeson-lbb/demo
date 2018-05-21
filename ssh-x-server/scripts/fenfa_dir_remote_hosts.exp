@@ -1,0 +1,5 @@
+#!/bin/expect
+spawn /ssh-x-server/scripts/fenfa_dir_remote_hosts.sh 
+expect {
+    "yes/no"  { send "yes\r";exp_continue }
+ }

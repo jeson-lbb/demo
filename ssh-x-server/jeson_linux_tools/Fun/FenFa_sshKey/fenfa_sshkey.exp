@@ -1,0 +1,19 @@
+#!/bin/expect
+if { $argc != 4 } {
+	send_user "usage: expect fenfa_sshkey.exp pub_key_file remote_user remote_passaword remote_ip\n"
+	exit 10
+}
+# defile var
+set file_key_pub [ lindex $argv 0 ]
+set remote_user  [ lindex $argv 1 ]
+set remote_password [ lindex $argv 2 ]
+set remote_ip    [ lindex $argv 3 ]
+# spawn scp /etc/hosts root@10.0.0.0/24:/etc/hosts
+# spawn scp -P 22 $file xiaoming@$host:$dir
+# spawn ssh-copy-id -i $file " -p 22 xiaoming@$host"
+spawn ssh-copy-id -i $file_key_pub " -p 22 $remote_user@$remote_ip"
+expect {
+	"yes/no"     { send "yes\r";exp_continue }
+	"*password"  { send "$remote_password\r" }
+ }
+expect eof

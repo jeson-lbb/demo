@@ -1,0 +1,27 @@
+source ~/jeson_linux_tools/local_sh/FenFa_Remote_Hosts.sh 用法：接收参数再转传部分接收到的参数给远端机器
+	通用脚本接收的参数格式-5个参数：
+	FenFa_Remote_Hosts  1）`eval echo ${Path_Remote_Users_IPs_conf}` 2）"/etc/sysctl.conf" 3）"bash ~/remote_sh/Remote_YouHua_Backup.sh" 4）"sysctl" 5）"-p" 
+				1）要传批量远程机器的IP列表	2）要传的文件或要处理的项目	3）远端要执行的-脚本-命令	4）远端机器要求执行的重新读取配置文件的-命令	5）选项  
+
+		该脚本参数传到远端脚本格式：如果 3) 为空值：只用 1）2） 参数
+		1）while循环===》》   rsync -az {2）要传的文件}  ${Remote_User}@${Remote_IP}:~
+
+		该脚本参数传到远端脚本格式：如果 3) 值不为空 ：1）  2）  3）  4）  5）  加6）${Local_IP给远端机器返回log用}
+1）while循环===》》ssh ${Remote_User}@${Remote_IP}  3）${Remote_Exe_Script}   2）${Path_Remote_DEST_Files}  4）${Remote_Reload_CMD}  5）${Remote_Reload_Opt}  6）${Local_IP} &>/dev/null &
+		 	
+		bash  -x ~/remote_sh/Remote_YouHua_Backup.sh /etc/sysctl.conf 10.0.0.33 sysctl -p
+
+
+本地日志：
+[root@WEB_Lnmp02 FenFa_files_log]#cat /root/jeson_linux_tools/Log/FenFa_files_log/FenFa_Files_true.log 
+Fen Fa /root/jeson_linux_tools/remote_sh to root@10.0.0.30  --- [ true ] 2018-03-30_22:22:32
+Fen Fa /root/jeson_linux_tools/remote_sh to root@10.0.0.31  --- [ true ] 2018-03-30_22:22:32
+Fen Fa /root/jeson_linux_tools/remote_sh to root@10.0.0.32  --- [ true ] 2018-03-30_22:22:32
+
+[root@WEB_Lnmp02 Log]#cat /Log_Backup/Log/sshd_config.true.log_10.0.0.30
+10.0.0.30  Backup [ /etc/ssh/sshd_config.bak.10.0.0.30/sshd_config.2018-03-31_02:09:58 ]           --- [ OK ] 2018-03-31_02:09:58
+10.0.0.30  Update [ /etc/ssh/sshd_config ] By [ /root/remote_sh/Conf/linux_Sys_Youhua_conf/sshd_config ]--- [ OK ] 2018-03-31_02:09:58
+10.0.0.30  [/etc/ssh/sshd_config] [ /etc/init.d/sshd reload ]                                          --- [ OK ] 2018-03-31_02:09:58
+
+[root@WEB_Lnmp02 Log]#cat /Log_Backup/Log/sysctl.conf.false.log_10.0.0.30 
+10.0.0.30  [ /etc/sysctl.conf ]  It has been Updated and does not need to be Update  2018-03-30_23:54:58

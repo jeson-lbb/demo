@@ -1,0 +1,25 @@
+安装报错：
+/var/html/www/include/dedesql.class.php 
+换为这个：    
+if(isset($GLOBALS['arrs1']))
+{
+$v1 = $v2 = '';
+for($i=0;isset($arrs1[$i]);$i++)
+{
+$v1 .= chr($arrs1[$i]);
+}
+for($i=0;isset($arrs2[$i]);$i++)
+{
+$v2 .= chr($arrs2[$i]);
+}
+$GLOBALS[$v1] .= $v2;
+}
+登录后白屏：
+/var/html/www/include/userlogin.class.php    
+删掉或注释6行
+/*@session_register($this->keepUserIDTag);*/
+/*@session_register($this->keepUserTypeTag);*/
+/*@session_register($this->keepUserChannelTag);*/
+/*@session_register($this->keepUserNameTag);*/
+/*@session_register($this->keepUserPurviewTag);*/
+/*@session_register($this->keepAdminStyleTag);*/

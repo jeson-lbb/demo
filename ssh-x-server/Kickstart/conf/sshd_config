@@ -1,0 +1,7 @@
+###sshd_config###
+Port 22
+PermitRootLogin yes
+PermitEmptyPasswords no
+UseDNS no
+GSSAPIAuthentication no
+###ListenAddress 10.0.0.7:22

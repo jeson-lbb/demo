@@ -1,0 +1,17 @@
+192.168.199.31 Nginx-LB01-server
+192.168.199.36 Backup-server
+192.168.199.36 Backup-server
+192.168.199.31 Nginx-LB01-server
+192.168.199.32 Nginx-LB02-server
+192.168.199.36 Backup-server
+192.168.199.33 Nginx-web-server
+192.168.199.36 Backup-server
+192.168.199.31 Nginx-LB01-server
+192.168.199.34 Apache-web-server
+192.168.199.31 Nginx-LB01-server
+192.168.199.35 Nfs-server
+192.168.199.36 Backup-server
+192.168.199.36 Backup-server
+192.168.199.37 MySQL-server
+192.168.199.38 ssh-x-server
+172.16.1.8 centos.etiantian.org

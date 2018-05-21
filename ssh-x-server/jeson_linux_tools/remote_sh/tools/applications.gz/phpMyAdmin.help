@@ -1,0 +1,6 @@
+远程登录MySQL问题：
+ * allow login to any user entered server in cookie based authentication
+ *
+ * @global boolean $cfg['AllowArbitraryServer']
+ */
+$cfg['AllowArbitraryServer'] =false; 改为 ==》true;
